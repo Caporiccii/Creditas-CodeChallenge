@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class ApiEmprestimoApplication
 
 fun main(args: Array<String>) {
+	println("vai agora")
 	runApplication<ApiEmprestimoApplication>(*args)
 }
