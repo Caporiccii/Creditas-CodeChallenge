@@ -21,10 +21,9 @@ class SimulatorController {
     @Operation(method = "GET",
                summary = "Simulates Credit",
                description = "This endpoint return the value of a credit simulation")
-
-    @GetMapping("/{totalLoan}/{totalTaxes}/{montlhyPayment}")
     @ResponseBody
-    fun simulate(@PathVariable totalLoan:Double,  @PathVariable totalTaxes:Double, @PathVariable montlhyPayment:Int) : ResponseEntity<Loan> {
+    @GetMapping("/{totalLoan}/{totalTaxes}/{montlhyPayment}")
+    fun simulate(@PathVariable totalLoan:Double,  @PathVariable totalTaxes:Int, @PathVariable montlhyPayment:Int) : ResponseEntity<Loan> {
         return ResponseEntity.ok().body(loanService.returnSimulate(totalLoan, totalTaxes, montlhyPayment))
     }
 

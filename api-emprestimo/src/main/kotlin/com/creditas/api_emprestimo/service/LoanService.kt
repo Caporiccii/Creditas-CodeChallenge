@@ -2,7 +2,6 @@ package com.creditas.api_emprestimo.service
 
 import com.creditas.api_emprestimo.dto.Loan
 import com.creditas.api_emprestimo.factory.Simulate
-import com.creditas.api_emprestimo.model.LoanModel
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -11,19 +10,25 @@ class LoanService {
 
     @Autowired
     lateinit var simulate: Simulate
-
     val loan = Loan()
 
-    lateinit var loanModel:LoanModel
+    fun setTaxValue(age: Int) : Double{
+        return when {
+            age <= 25 -> 0.05
+            age in 25..40 -> 0.03
+            age in 41..60 -> 0.02
+            else -> 0.04
+        }
+    }
 
-     fun returnSimulate(value: Double, date: Double, prazoMonthly: Int) : Loan {
+     fun returnSimulate(value: Double, age: Int, prazoMonthly: Int) : Loan {
 
-        var tax: Double = 0.0
-        if(date <= 25 )
-        tax = 0.02
+        var tax: Double = setTaxValue(age)
+
+        val montlhyPayment = simulate.calculate(value,tax,prazoMonthly)
 
         loan.totalLoan = value.toString()
-        loan.montlhyPayment = simulate.calculate(value,tax,prazoMonthly).toString()
+        loan.montlhyPayment = simulate.round2Decimal(montlhyPayment).toString()
         loan.totalTaxes = tax * prazoMonthly
 
         return loan
