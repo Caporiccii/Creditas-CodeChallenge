@@ -1,18 +1,18 @@
 package com.creditas.api_emprestimo.factory
 
-import java.math.BigDecimal
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 import kotlin.math.pow
 
+@Component
 class Simulate {
 
-    var PV = 10000.0
-    var r   = 0.02
-    var n   = 12
+    val one = 1.0
 
-    fun calculate () : Double{
+    fun calculate (pv:Double, r:Double, n: Int ) : Double{
 
-        var numerador = PV * r
-        var denominador = 1 - (1 + r).pow(-n)
+        var numerador = pv * r
+        var denominador = one - (one + r).pow(-n)
 
         return numerador / denominador;
     }
