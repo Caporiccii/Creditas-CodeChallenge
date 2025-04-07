@@ -25,12 +25,12 @@ class LoanService {
         age: Int,
         prazoMonthly: Int,
     ): Loan {
-        var tax: Double = setTaxValue(age)
+        val tax: Double = setTaxValue(age)
 
-        val montlhyPayment = simulate.calculate(value, tax, prazoMonthly)
+        val monthlyPayment = simulate.calculate(value, tax, prazoMonthly)
 
         loan.totalLoan = value.toString()
-        loan.montlhyPayment = simulate.round2Decimal(montlhyPayment).toString()
+        loan.monthlyPayment = simulate.round2Decimal(monthlyPayment).toString()
         loan.totalTaxes = tax * prazoMonthly
 
         return loan
