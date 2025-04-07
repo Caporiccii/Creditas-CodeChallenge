@@ -1,6 +1,6 @@
 package com.creditas.api.emprestimo.dto
 
-class Loan {
+class Credit {
     var totalLoan = ""
     var monthlyPayment = ""
     var totalTaxes = 0.0

@@ -6,7 +6,7 @@ import java.math.RoundingMode
 import kotlin.math.pow
 
 @Component
-class Simulate {
+class Simulator {
     val one = 1.0
 
     fun calculate(
@@ -14,14 +14,14 @@ class Simulate {
         r: Double,
         n: Int,
     ): Double {
-        var numerador = pv * r
-        var denominador = one - (one + r).pow(-n)
+        val numerator = pv * r
+        val denominator = one - (one + r).pow(-n)
 
-        return numerador / denominador
+        return numerator / denominator
     }
 
     fun round2Decimal(number: Double): BigDecimal {
-        var value = BigDecimal(number)
+        val value = BigDecimal(number)
 
         return value.setScale(2, RoundingMode.HALF_UP)
     }

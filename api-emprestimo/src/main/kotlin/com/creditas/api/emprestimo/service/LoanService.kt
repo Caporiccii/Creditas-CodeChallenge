@@ -1,16 +1,33 @@
 package com.creditas.api.emprestimo.service
 
-import com.creditas.api.emprestimo.dto.Loan
-import com.creditas.api.emprestimo.factory.Simulate
+import com.creditas.api.emprestimo.dto.Credit
+import com.creditas.api.emprestimo.factory.Simulator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class LoanService {
     @Autowired
-    lateinit var simulate: Simulate
-    val loan = Loan()
+    lateinit var simulator: Simulator
+    val loan = Credit()
 
+    fun returnSimulate(
+        value: Double,
+        montlhyPayment: Int,
+        age: LocalDate,
+    ): Credit {
+        val tax: Double = setTaxValue(convertAge(age))
+
+        val monthlyPayment = simulator.calculate(value, tax, montlhyPayment)
+
+        loan.totalLoan = value.toString()
+        loan.monthlyPayment = simulator.round2Decimal(monthlyPayment).toString()
+        loan.totalTaxes = tax * montlhyPayment
+
+        return loan
+    }
+    
     fun setTaxValue(age: Int): Double {
         return when {
             age <= 25 -> 0.05
@@ -20,19 +37,7 @@ class LoanService {
         }
     }
 
-    fun returnSimulate(
-        value: Double,
-        age: Int,
-        prazoMonthly: Int,
-    ): Loan {
-        val tax: Double = setTaxValue(age)
-
-        val monthlyPayment = simulate.calculate(value, tax, prazoMonthly)
-
-        loan.totalLoan = value.toString()
-        loan.monthlyPayment = simulate.round2Decimal(monthlyPayment).toString()
-        loan.totalTaxes = tax * prazoMonthly
-
-        return loan
+    fun convertAge(age: LocalDate): Int{
+        return LocalDate.now().year - age.year
     }
 }
