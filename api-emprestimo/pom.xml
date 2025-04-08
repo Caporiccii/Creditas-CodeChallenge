@@ -28,7 +28,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>23</java.version>
+		<java.version>21</java.version>
 		<kotlin.version>2.1.0</kotlin.version>
 		<junit.jupiter.version>5.10.0</junit.jupiter.version>
 		<mockito.kotlin.version>5.2.1</mockito.kotlin.version>
