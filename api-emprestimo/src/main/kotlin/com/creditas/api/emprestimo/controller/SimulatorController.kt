@@ -29,7 +29,5 @@ class SimulatorController {
         @PathVariable totalLoan: Double,
         @PathVariable montlhyPayment: Int,
         @PathVariable age: LocalDate,
-    ): ResponseEntity<Credit> {
-        return ResponseEntity.ok().body(loanService.returnSimulate(totalLoan, montlhyPayment, age))
-    }
+    ): ResponseEntity<Credit> = ResponseEntity.ok().body(loanService.returnSimulate(totalLoan, montlhyPayment, age))
 }

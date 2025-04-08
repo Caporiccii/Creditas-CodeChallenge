@@ -27,17 +27,14 @@ class LoanService {
 
         return loan
     }
-    
-    fun setTaxValue(age: Int): Double {
-        return when {
+
+    fun setTaxValue(age: Int): Double =
+        when {
             age <= 25 -> 0.05
             age in 25..40 -> 0.03
             age in 41..60 -> 0.02
             else -> 0.04
         }
-    }
 
-    fun convertAge(age: LocalDate): Int{
-        return LocalDate.now().year - age.year
-    }
+    fun convertAge(age: LocalDate): Int = LocalDate.now().year - age.year
 }

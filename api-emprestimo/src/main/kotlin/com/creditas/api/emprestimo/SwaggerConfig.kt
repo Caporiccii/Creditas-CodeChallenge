@@ -8,13 +8,12 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class SwaggerConfig {
     @Bean
-    fun configSwagger(): OpenAPI {
-        return OpenAPI()
+    fun configSwagger(): OpenAPI =
+        OpenAPI()
             .info(
                 Info()
                     .title("Api-Credit")
                     .version("1.0.0")
                     .description("Calc some Credit"),
             )
-    }
 }
