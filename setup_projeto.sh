@@ -8,7 +8,8 @@ JDK_URL="https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21
 ARCHIVE_NAME="openjdk-${JDK_VERSION}.tar.gz"
 INSTALL_DIR="/opt/jdk-${JDK_VERSION}"
 KTLINT_VERSION="1.1.1"
-PROJECT_PATH="/home/brilhinho/Projects/Creditas-CodeChallenge/api-emprestimo"
+PROJECT_PATH="$(pwd)"
+API_PATH="$(pwd)/api-emprestimo"
 # ============================
 
 echo "☕ Instalando Java $JDK_VERSION..."
@@ -23,6 +24,7 @@ sudo update-alternatives --set java "$INSTALL_DIR/bin/java"
 sudo update-alternatives --set javac "$INSTALL_DIR/bin/javac"
 java -version
 
+cd "$API_PATH"
 echo "📦 Instalando Maven..."
 sudo apt update
 sudo apt install -y maven
@@ -31,16 +33,16 @@ mvn -v
 echo "🧹 Instalando Ktlint CLI..."
 curl -sSLo ktlint https://github.com/pinterest/ktlint/releases/download/${KTLINT_VERSION}/ktlint
 chmod +x ktlint
-sudo mv ktlint /usr/local/bin/
 ktlint --version
 
 echo "📂 Entrando no diretório do projeto..."
-cd "$PROJECT_PATH"
+cd "$API_PATH"
 
 echo "🎯 Rodando Ktlint nos arquivos .kt..."
 ktlint "**/*.kt" || true
 
-echo "🛠️ Rodando Maven build em $(pwd)..."
+echo "🛠️ Rodando Maven build em $(pwd)/api-emprestimo..."
+cd "$API_PATH"
 mvn clean install
 
 echo "🔍 Procurando JAR em target/..."

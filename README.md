@@ -32,3 +32,12 @@ Response esperado:
   "totalTaxes": 0.36
 }
 
+# Arquitetura e Estrutura
+
+O projeto foi desenvolido dessa forma, devido a simplicidade da regra de negocio, usamos o padrao singleton para garantir que somente uma instancia do
+servico sera disponibilizado para garantir consistencia e integridade dos dados.
+
+Ja a organizacao de diretorios, visa deixar pouco acoplado a regra de negocio da parte rest e estruturas como mensageria.
+
+# Teste de carga
+Execute o run_jmeter_test_sh.
