@@ -1,0 +1,17 @@
+@startuml C4-Context
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(usuario, "Usuário", "Pessoa que acessa o sistema para simular e solicitar empréstimos")
+
+System(sistema, "Sistema de Empréstimos", "Simula e propõe empréstimos personalizados")
+
+System_Ext(mongo, "MongoDB", "Banco de dados de documentos")
+System_Ext(sqs, "Amazon SQS", "Serviço de filas para comunicação assíncrona")
+System_Ext(sns, "Amazon SNS", "Serviço de notificação para envio de propostas")
+
+Rel(usuario, sistema, "Usa", "HTTPS/JSON")
+Rel(sistema, mongo, "Lê e grava dados", "MongoDB protocolo")
+Rel(sistema, sqs, "Publica eventos de simulação")
+Rel(sistema, sns, "Envia notificações de propostas")
+
+@enduml
