@@ -6,7 +6,7 @@ Feito em Kotlin e Spring Boot.
 
 # Setup do Projeto
 
-Dê permissão para rodar o script:
+Na raiz do projeto, dê permissão para rodar o script:
 
 chmod +x setup_projeto.sh
 
