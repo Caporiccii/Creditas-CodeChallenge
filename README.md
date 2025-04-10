@@ -15,6 +15,7 @@ em seguida rode:
 ./setup_projeto.sh
 
 Para rodar via docker, na raiz do projeto, execute:
+
 docker compose up --build
 
 # Exemplos de requisiçôes 
